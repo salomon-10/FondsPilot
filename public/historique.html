@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique — FondsPilot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="js/hist.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #6a5acd;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 { margin: 0; }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .search-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .search-filter input, .search-filter select {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            flex: 1;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #6a5acd;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        @media (max-width: 768px) {
+            .search-filter { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Historique</h1>
+    <nav>
+        <a href="dashboard.html">← Retour</a>
+    </nav>
+</header>
+
+<main>
+    <div class="search-filter">
+        <input type="text" id="searchInput" placeholder="Rechercher une transaction...">
+        <select id="filterType">
+            <option value="all">Tous</option>
+            <option value="credit">Crédit</option>
+            <option value="debit">Retrait</option>
+            <option value="economiser">Épargne</option>
+        </select>
+    </div>
+
+    <table id="historiqueTable">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Montant</th>
+                <th>Catégorie</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+    </table>
+</main>
+
+<script>
+    // Récupération des transactions depuis localStorage
+    const transactions = JSON.parse(localStorage.getItem('operations') || '[]');
+
+    const tbody = document.querySelector('#historiqueTable tbody');
+
+    function displayTransactions(list) {
+        tbody.innerHTML = '';
+        if (list.length === 0) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td colspan="5" style="text-align:center;">Aucune transaction trouvée</td>`;
+            tbody.appendChild(tr);
+            return;
+        }
+        list.forEach(tx => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${tx.date || '-'}</td>
+                <td>${tx.type ? tx.type.charAt(0).toUpperCase() + tx.type.slice(1) : '-'}</td>
+                <td>${tx.montant || '-'} CFA</td>
+                <td>${tx.categorie || '-'}</td>
+                <td>${tx.description || '-'}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    displayTransactions(transactions);
+
+    // Recherche et filtre dynamique
+    const searchInput = document.getElementById('searchInput');
+    const filterType = document.getElementById('filterType');
+
+    function filterTransactions() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const typeFilter = filterType.value;
+        const filtered = transactions.filter(tx => {
+            const matchesSearch = (tx.description && tx.description.toLowerCase().includes(searchTerm)) || 
+                                  (tx.categorie && tx.categorie.toLowerCase().includes(searchTerm));
+            const matchesType = typeFilter === 'all' || tx.type === typeFilter;
+            return matchesSearch && matchesType;
+        });
+        displayTransactions(filtered);
+    }
+
+    searchInput.addEventListener('input', filterTransactions);
+    filterType.addEventListener('change', filterTransactions);
+</script>
+
+</body>
+</html>

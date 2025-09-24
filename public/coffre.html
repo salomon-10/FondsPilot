@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coffre — FondsPilot</title>
+  <link rel="icon" type="image/png" href="img/icon.png">
+  <link rel="stylesheet" href="css/coffre.css">
+  <script src="js/balance.js"></script>
+  <script src="js/coffre.js" defer></script>
+    <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    refreshBalance(); // affiche le solde actuel
+  });
+</script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <button onclick="window.location.href='dashboard.html'"><div class="logo-text">FondsPilot</div></button>
+
+    <div class="header-right">
+      <div class="demo-badge" id="balanceBadge">Solde : —</div>
+    </div>
+  </header>
+
+  <!-- Main Page -->
+  <main class="page">
+    
+    <!-- Console latérale -->
+    <aside class="console">
+      <h3>Console du coffre</h3>
+
+      <!-- Écran du code -->
+      <div class="console-screen" id="consoleScreen">______<span class="cursor">|</span></div>
+
+      <!-- Clavier numérique -->
+      <div class="console-keypad">
+        <button class="num-btn">1</button>
+        <button class="num-btn">2</button>
+        <button class="num-btn">3</button>
+        <button class="num-btn">4</button>
+        <button class="num-btn">5</button>
+        <button class="num-btn">6</button>
+        <button class="num-btn">7</button>
+        <button class="num-btn">8</button>
+        <button class="num-btn">9</button>
+        <button class="num-btn">0</button>
+        <button id="clearBtn" class="func-btn">C</button>
+        <button id="enterBtn" class="func-btn">OK</button>
+      </div>
+
+      <!-- Changement de code -->
+      <div class="change-code">
+        <button id="changeCodeBtn" class="func-btn">Modifier le code</button>
+        <div id="changeCodeForm" style="display:none; margin-top:8px;">
+          <input type="password" id="oldCodeInput" placeholder="Ancien code 6 chiffres" maxlength="6">
+          <input type="password" id="newCodeInput" placeholder="Nouveau code 6 chiffres" maxlength="6">
+          <button id="saveNewCode" class="btn btn-primary">Valider</button>
+        </div>
+      </div>
+
+      <!-- Coffre accessible après code correct -->
+      <div class="coffre-access" id="coffreAccess">
+  <div>Total du coffre : <span id="coffreTotal">0</span></div>
+  <div>Total épargné : <span id="totalEpargne">0</span></div>
+
+  <div class="console-list" id="coffreList"></div>
+  <div class="console-actions">
+    <label for="withdrawAmount">Retirer du coffre :</label>
+    <input type="number" id="withdrawAmount" placeholder="Ex : 100" min="1" step="0.01">
+    <button id="withdrawCoffreBtn" class="btn btn-primary">Retirer</button>
+  </div>
+</div>
+
+    </aside>
+
+    <!-- Coffre central -->
+    <section class="coffre-main">
+      <div class="coffre-illustration">
+        <div class="coffre-body">
+          <div class="coffre-door"></div>
+          <div class="coffre-handle"></div>
+        </div>
+        <p class="coffre-text">Votre coffre-fort</p>
+      </div>
+    </section>
+   <button id="resetCoffreBtn" style="display:none;">⏺️ Reset</button>
+
+  </main>
+
+  <!-- Modal confirmation retrait -->
+  <div class="modal-back" id="modalBack">
+    <div class="modal">
+      <h3>Confirmer le retrait</h3>
+      <p id="modalBody">Résumé...</p>
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:14px;">
+        <button class="btn btn-ghost" id="modalCancel">Annuler</button>
+        <button class="btn btn-primary" id="modalConfirm">Confirmer</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

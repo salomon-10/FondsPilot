@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FondsPilot</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="icon" type="image/png" href="img/icon.png">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <button class="sidebar-toggle">☰</button>
+    <span class="logo-text">FondsPilot</span>
+    <div class="profile">
+      <img id="dashboardProfile" src="img/default-avatar.png" alt="Profil">
+      <span id="dashboardName"></span>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <div class="sidebar-wrapper">
+    <aside class="sidebar">
+      <nav class="nav">
+        <ul>
+          <li class="currency">
+            <label>Devise :</label>
+            <select id="currencySelect"> 
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="JPY">JPY</option>
+              <option value="CNY">CNY</option>
+              <option value="XAF">XAF</option>
+              <option value="XOF">XOF</option>
+            </select>
+          </li>
+          <li><button onclick="window.location.href='dashboard.html'"><img src="img/accueil.png"> Dashboard</button></li>
+          <li><button onclick="window.location.href='coffre.html'"><img src="img/coffre-fort.png"> Coffre-fort</button></li>
+          <li><button onclick="window.location.href='historique.html'"><img src="img/gestion-du-temps.png"> Historique</button></li>
+          <li><button onclick="window.location.href='setting.html'"><img src="img/parametres.png"> Paramètres</button></li>
+          <li><button onclick="window.location.href='support.html'"><img src="img/information.png"> Support</button></li>
+          <li><button onclick="window.location.href='index.html'"><img src="img/logout.png"> Déconnexion</button></li>
+        </ul>
+      </nav>
+    </aside>
+  </div>
+
+  <!-- Main -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Balance -->
+      <div class="balance-card">
+        <h2>Total Balance</h2>
+        <h3 id="balanceAmount">0.00</h3>
+      </div>
+
+      <!-- Opérations -->
+      <div class="operations-grid">
+        <button class="operation" onclick="window.location.href='deposit.html'">
+          <img src="img/depot-dargent.png" alt="">
+          <span>Ajouter de l'argent</span>
+        </button>
+        <button class="operation" onclick="window.location.href='retrait.html'">
+          <img src="img/retrait-despeces.png" alt="">
+          <span>Retirer de l'argent</span>
+        </button>
+        <button class="operation" onclick="window.location.href='credit.html'">
+          <img src="img/credit.png" alt="">
+          <span>Créditer</span>
+        </button>
+        <button class="operation" onclick="window.location.href='economiser.html'">
+          <img src="img/economiser-de-largent.png" alt="">
+          <span>Économiser</span>
+        </button>
+      </div>
+
+      <!-- Stats rapides -->
+      <section class="aside">
+        <h3>Stats rapides</h3>
+      </section>
+    </div>
+  </main>
+
+  <!-- Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      // Vérification utilisateur
+      const img = sessionStorage.getItem("userPicture");
+      const name = sessionStorage.getItem("userName");
+      if (!img || !name) {
+        alert("Utilisateur non connecté !");
+        window.location.href = "index.html";
+        return;
+      }
+      document.getElementById("dashboardProfile").src = img;
+      document.getElementById("dashboardName").textContent = name;
+
+      // Initialisation balance
+      if (typeof initBalancePage === "function") {
+        initBalancePage("currencySelect");
+      }
+
+      // Toggle sidebar
+      const toggle = document.querySelector(".sidebar-toggle");
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("sidebar-open");
+      });
+
+      // Affichage stats rapides
+      updateStats();
+    });
+
+    // Fonctions utilitaires
+    function getOperations() {
+      return JSON.parse(sessionStorage.getItem("operations") || "[]");
+    }
+
+    function updateStats() {
+      const operations = getOperations();
+      let depots = 0, retraits = 0;
+
+      operations.forEach(op => {
+        if (op.type === "deposit") depots += op.amount;
+        if (op.type === "withdraw") retraits += op.amount;
+      });
+
+      const aside = document.querySelector(".aside");
+      if (!aside) return;
+
+      aside.innerHTML = `
+        <h3>Stats rapides</h3>
+        <p>➡ Dépôts ce mois : ${depots.toFixed(2)}€</p>
+        <p>➡ Retraits : ${retraits.toFixed(2)}€</p>
+        <p>📊 Dernière opération : ${
+          operations.length > 0 ? `${operations[0].type} ${operations[0].amount}€` : "Aucune"
+        }</p>
+      `;
+    }
+  </script>
+  <script src="js/balance.js"></script>
+</body>
+</html>

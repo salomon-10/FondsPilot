@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paramètres — FondsPilot</title>
+  <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+  <div class="settings-container">
+    <h1>⚙️ Paramètres</h1>
+    <button onclick="window.location.href='dashboard.html'">retour</button>
+
+    <!-- Section Profil -->
+    <section class="profile-section">
+      <h2>Mon Profil</h2>
+      <div class="profile-upload">
+        <img id="profilePreview" src="img/default-avatar.png" alt="Photo de profil">
+        <input type="file" id="profileInput" accept="image/*">
+      </div>
+    </section>
+
+    <!-- Section Statistiques rapides -->
+    <section class="stats-section">
+      <h2>Statistiques rapides</h2>
+      <div class="quick-stats">
+        <p>💰 Solde actuel: <span id="stat-solde">0</span></p>
+        <p>📉 Total retraits: <span id="stat-retraits">0</span></p>
+        <p>📈 Total crédits: <span id="stat-credits">0</span></p>
+        <p>🏦 Total épargné: <span id="stat-epargne">0</span></p>
+      </div>
+    </section>
+
+    <!-- Section Préférences -->
+    <section class="preferences-section">
+      <h2>Préférences</h2>
+      <label for="theme">Thème :</label>
+      <select id="theme">
+        <option value="light">Clair</option>
+        <option value="dark">Sombre</option>
+      </select>
+
+      <label for="langue">Langue :</label>
+      <select id="langue">
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+      </select>
+
+      <label for="devise">Devise :</label>
+      <select id="devise">
+        <option value="XOF">XOF (CFA)</option>
+        <option value="USD">USD ($)</option>
+        <option value="EUR">EUR (€)</option>
+      </select>
+    </section>
+  </div>
+
+  <script src="js/stats.js"></script>
+  <script>
+    // Éléments
+const profileInput = document.getElementById("profileInput");
+const profilePreview = document.getElementById("profilePreview");
+
+// Limite taille en octets (ex: 2 Mo)
+const MAX_SIZE = 5 * 1024 * 1024;
+
+// Fonction pour charger la photo depuis localStorage
+function loadProfileImage() {
+  const savedImage = localStorage.getItem("profileImage");
+  if (savedImage) profilePreview.src = savedImage;
+
+  // Mettre à jour la photo sur le dashboard si l'élément existe
+  const dashboardImg = document.getElementById("dashboardProfile");
+  if (dashboardImg && savedImage) dashboardImg.src = savedImage;
+}
+
+// Fonction pour supprimer la photo
+function removeProfileImage() {
+  localStorage.removeItem("profileImage");
+  profilePreview.src = "img/default-avatar.png";
+  const dashboardImg = document.getElementById("dashboardProfile");
+  if (dashboardImg) dashboardImg.src = "img/default-avatar.png";
+}
+
+// Upload et sauvegarde
+profileInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  if (file.size > MAX_SIZE) {
+    alert("La photo est trop volumineuse (max 5 Mo).");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    profilePreview.src = reader.result;
+    localStorage.setItem("profileImage", reader.result);
+
+    // Mettre à jour photo sur le dashboard si elle existe
+    const dashboardImg = document.getElementById("dashboardProfile");
+    if (dashboardImg) dashboardImg.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+// Charger la photo au chargement de la page
+window.addEventListener("DOMContentLoaded", loadProfileImage);
+
+  </script>
+</body>
+</html>

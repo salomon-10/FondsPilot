@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crédit — FondsPilot</title>
+  <link rel="icon" type="image/png" href="img/icon.png" />
+  <link rel="stylesheet" href="css/deposit.css">
+  <script src="js/balance.js"></script>
+  <script src="js/operation.js"></script>
+  <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    refreshBalance(); // affiche le solde actuel
+  });
+</script>
+</head>
+<body>
+  <header class="header" style="background:#e0f7ff; color:#0077b6;">
+    <button class="sidebar-toggle">☰</button>
+    <div class="logo-text">FondsPilot</div>
+    <div class="header-right">
+      <div class="demo-badge" id="balanceBadge">Solde : —</div>
+    </div>
+  </header>
+
+  <main class="page">
+    <aside class="sidebar">
+      <nav class="nav-list">
+        <button onclick="location.href='dashboard.html'"><img src="img/accueil.png" alt=""> Dashboard</button>
+      </nav>
+    </aside>
+
+    <section class="main">
+      <div class="card" style="border-top:4px solid #0077b6;">
+        <h2>Ajouter un Crédit</h2>
+        <div class="muted">Ajoutez un crédit simulé à votre solde.</div>
+
+        <form id="operationForm" data-type="credit" autocomplete="off" class="form-grid">
+          <div>
+            <div class="field">
+              <label for="amount">Montant à créditer</label>
+              <input id="amount" type="number" min="1" step="0.01" placeholder="Ex : 100.00" required />
+            </div>
+            <div class="field">
+              <input id="origin" type="text" placeholder="Source du crédit" />
+            </div>
+            <div class="field">
+              <label for="ref">Référence (optionnel)</label>
+              <input id="ref" type="text" placeholder="Ex : REF-2025-0003" />
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:6px">
+              <input id="saveDemo" type="checkbox" checked />
+              <label for="saveDemo" style="font-size:14px;color:#555">Enregistrer l'opération</label>
+            </div>
+            <div style="margin-top:16px">
+              <button class="btn btn-primary" type="submit">Créditer</button>
+              <button type="button" class="btn btn-ghost" onclick="location.href='dashboard.html'">Annuler</button>
+            </div>
+          </div>
+
+          <aside>
+            <div class="summary" style="border-left:3px solid #0077b6;">
+              <div class="row"><div>Montant</div><div id="sumAmount"><span class="pill">—</span></div></div>
+              <div class="row"><div>Origine</div><div id="sumMethod"><span class="pill">—</span></div></div>
+              <div class="row"><div>Temps estimé</div><div id="sumTime">Instantané</div></div>
+              <div style="margin-top:12px;font-size:13px;color:#475569">
+                <strong>Récapitulatif</strong>
+                <div id="recap" style="margin-top:8px;color:#6b7280">Remplis le formulaire pour voir le récapitulatif.</div>
+              </div>
+              <div class="cta">
+                <button id="previewBtn" class="btn btn-ghost">Prévisualiser</button>
+                <button id="confirmBtn" class="btn btn-primary">Confirmer</button>
+              </div>
+            </div>
+          </aside>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-back" id="modalBack">
+    <div class="modal">
+      <h3 id="modalTitle">Confirmer le Crédit</h3>
+      <p id="modalBody">Résumé...</p>
+      <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:14px;">
+        <button class="btn btn-ghost" id="modalCancel">Annuler</button>
+        <button class="btn btn-primary" id="modalConfirm">Confirmer</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
