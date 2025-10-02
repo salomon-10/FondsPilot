@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FondsPilot</title>
+<link rel="icon" type="image/png" href="public/img/icon.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff;
+    background: linear-gradient(-45deg, #2a4051, #1a3a40, #0d2b29, #4e8188);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+  }
+
+  @keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  header {
+    padding: 30px 50px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #d8e3e2;
+    text-shadow: 2px 2px 8px rgba(0,255,240,0.5);
+    letter-spacing: 1.2px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 50px;
+    gap: 50px;
+  }
+
+  .text-section {
+    max-width: 600px;
+    text-align: left;
+    animation: fadeInLeft 1.2s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInLeft {
+    from {transform: translateX(-50px); opacity: 0;}
+    to {transform: translateX(0); opacity: 1;}
+  }
+
+  .text-section h1 {
+    font-size: 50px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .highlight {
+    color: #00fff0;
+    position: relative;
+  }
+
+  .text-section h2 {
+    font-size: 28px;
+    color: #a0f0ff;
+  }
+
+  .Form1 {
+    backdrop-filter: blur(15px);
+    background: rgba(44, 46, 46, 0.5);
+    padding: 40px;
+    border-radius: 20px;
+    width: 360px;
+    box-shadow: 0 10px 25px rgba(0,255,240,0.2);
+    animation: fadeInRight 1.2s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInRight {
+    from {transform: translateX(50px); opacity: 0;}
+    to {transform: translateX(0); opacity: 1;}
+  }
+
+  .Form1 h2 {
+    font-size: 26px;
+    color: #00fff0;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .Form1 p {
+    font-size: 14px;
+    color: #c0c0c0;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .Form1 input[type="email"],
+  .Form1 input[type="password"],
+  .Form1 input[type="text"] {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,255,240,0.5);
+    background: rgba(255, 255, 255, 0.153);
+    color: #fff;
+    font-size: 15px;
+    transition: 0.3s ease;
+  }
+
+  .Form1 input:focus {
+    border-color: #00fff0;
+    box-shadow: 0 0 10px rgba(0,255,240,0.5);
+    outline: none;
+  }
+
+  .Form1 label {
+    font-size: 13px;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 15px;
+  }
+
+  .Form1 button {
+    background: linear-gradient(90deg, #00fff0, #00d4ff);
+    color: #1b1b1b;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .Form1 button:hover {
+    background: linear-gradient(90deg, #00d4ff, #00fff0);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,255,240,0.5);
+  }
+
+  button.Google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    border: 2px solid #00fff0;
+    border-radius: 12px;
+    background: transparent;
+    color: #00fff0;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  button.Google:hover {
+    background: rgba(5, 245, 229, 0.215);
+    transform: translateY(-2px);
+  }
+
+  button.Google img {
+    width: 22px;
+    height: 22px;
+  }
+
+  footer {
+    background: rgba(179, 179, 179, 0.457);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 30px 0;
+    backdrop-filter: blur(6px);
+  }
+
+  .foot {
+    max-width: 250px;
+    text-align: center;
+    color: #c0f0ff;
+    font-size: 14px;
+  }
+
+  .foot img {
+    margin-bottom: 10px;
+    width: 55px;
+    height: 55px;
+  }
+
+  footer strong {
+    display: block;
+    margin-top: 5px;
+    color: #00fff0;
+  }
+
+  @media(max-width:1024px) {
+    .container { flex-direction: column; gap: 30px; text-align: center; }
+    .text-section, .Form1 { max-width: 100%; }
+  }
+
+  @media(max-width:600px) {
+    header { font-size: 24px; text-align: center; }
+    .text-section h1 { font-size: 28px; }
+    .text-section h2 { font-size: 18px; }
+    .Form1 { padding: 25px; }
+    .Form1 button, button.Google { font-size: 14px; padding: 12px; }
+  }
+</style>
+</head>
+<body>
+<header>FondsPilot</header>
+
+<div class="container">
+  <div class="text-section">
+    <h1>Build your <span class="highlight">financial future!</span></h1>
+   
+  </div>
+
+  <div class="Form1">
+    <h2>Sign Up Quickly</h2>
+    <p>Less than a minute to start managing your funds.</p>
+    <form id="loginForm">
+      
+
+      <div id="g_id_onload"
+           data-client_id="352874874837-cfseuepiq75n2qfq6595lq3a581219iq.apps.googleusercontent.com"
+           data-context="signin"
+           data-ux_mode="popup"
+           data-callback="handleCredentialResponse">
+      </div>
+
+      <div class="g_id_signin"
+           data-type="standard"
+           data-shape="rectangular"
+           data-theme="outline"
+           data-text="signin_with"
+           data-size="large">
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer style="background: rgba(0,0,0,0.3); backdrop-filter: blur(6px); padding: 40px 20px; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 30px;">
+
+  <!-- Blocs fonctionnalités -->
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 50px; width: 100%; max-width: 900px;">
+    
+    <div class="foot" style="text-align: center; max-width: 200px;">
+      <img src="public/img/portefeuille.png" alt="wallet icon" style="width:50px; height:50px; margin-bottom:10px;">
+      <p style="font-size:14px;">Manage all your <strong>funds in one place</strong></p>
+    </div>
+
+    <div class="foot" style="text-align: center; max-width: 200px;">
+      <img src="public/img/goal.png" alt="goal icon" style="width:50px; height:50px; margin-bottom:10px;">
+      <p style="font-size:14px;">Focused on <strong>your financial goals</strong></p>
+    </div>
+
+  </div>
+
+  <!-- Ligne copyright -->
+  <div style="margin-top: 20px; font-size: 13px; color: #ccc; text-align: center;">
+    © 2025 FondsPilot. All rights reserved.
+  </div>
+
+</footer>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+function handleCredentialResponse(response) {
+    fetch("https://fondspilot.zya.me/google_auth.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id_token: response.credential })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data); 
+        if (data.success) {
+            // Stockage pour la session
+            sessionStorage.setItem("userName", data.name);
+            sessionStorage.setItem("userPicture", data.picture);
+            sessionStorage.setItem("id_token", response.credential); // pour API
+      
+            window.location.href = "public/dashboard.html";
+        } else {
+            alert("Authentication failed: " + data.error);
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Erreur serveur, réessaie plus tard.");
+    });
+}
+
+</script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</body>
+</body>
+</html>

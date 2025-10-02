@@ -66,6 +66,34 @@ function initBalancePage(currencySelectId) {
   refreshBalance();
 }
 
+async function refreshBalance() {
+  const balanceEls = document.querySelectorAll("#balanceAmount, #balanceBadge");
+
+  // Si l'utilisateur est connecté
+  const token = sessionStorage.getItem("id_token");
+  if (!token) return;
+
+  try {
+    const userId = await getUserIdFromToken(token); // fonction existante dans operation.js
+    const res = await fetch(`https://fondspilot.zya.me/Fondspilot-backend/api/balance.php?user_id=${userId}`, {
+      headers: { "Authorization": `Bearer ${token}` }
+    });
+    const data = await res.json();
+    if (data.status !== "success") throw new Error(data.message || "Erreur récupération solde");
+
+    const balance = data.balance;
+
+    balanceEls.forEach(el => {
+      if (el) el.innerText = formatCurrency(balance);
+    });
+
+  } catch (err) {
+    console.error("Impossible de charger le solde :", err);
+    balanceEls.forEach(el => { if(el) el.innerText = formatCurrency(0); });
+  }
+}
+
+
 // --- Exporter les fonctions pour les autres scripts ---
 window.getBalanceXOF = getBalanceXOF;
 window.formatCurrency = formatCurrency;

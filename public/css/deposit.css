@@ -137,8 +137,40 @@
     .btn{
       padding:12px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700;
     }
-    .btn-primary{background:linear-gradient(180deg,var(--primary),var(--primary-dark));color:#fff;box-shadow:0 8px 20px rgba(124,58,237,0.18)}
-    .btn-ghost{background:transparent;border:1px solid #e6e9ef;color:#374151}
+    /* Bouton principal : confirmation */
+.confirmBtn {
+  background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.8rem 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.18);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.confirmBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(124, 58, 237, 0.25);
+}
+
+/* Bouton fantôme / secondaire */
+.btn-ghost {
+  background: transparent;
+  border: 1px solid #e6e9ef;
+  color: #374151;
+  border-radius: var(--radius);
+  padding: 0.8rem 1.6rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.btn-ghost:hover {
+  background: rgba(0,0,0,0.05);
+  transform: translateY(-1px);
+}
 
     /* small helper pill */
     .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#f3f4f6;font-weight:700;font-size:13px;color:#374151}

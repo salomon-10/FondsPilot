@@ -40,7 +40,7 @@
           <li><button onclick="window.location.href='historique.html'"><img src="img/gestion-du-temps.png"> Historique</button></li>
           <li><button onclick="window.location.href='setting.html'"><img src="img/parametres.png"> Paramètres</button></li>
           <li><button onclick="window.location.href='support.html'"><img src="img/information.png"> Support</button></li>
-          <li><button onclick="window.location.href='index.html'"><img src="img/logout.png"> Déconnexion</button></li>
+          <li><button onclick="window.location.href='../index.html'"><img src="img/logout.png"> Déconnexion</button></li>
         </ul>
       </nav>
     </aside>
@@ -53,7 +53,7 @@
       <div class="balance-card">
         <h2>Total Balance</h2>
         <h3 id="balanceAmount">0.00</h3>
-      </div>
+      </div><br>
 
       <!-- Opérations -->
       <div class="operations-grid">
@@ -73,7 +73,7 @@
           <img src="img/economiser-de-largent.png" alt="">
           <span>Économiser</span>
         </button>
-      </div>
+      </div><br>
 
       <!-- Stats rapides -->
       <section class="aside">
@@ -81,19 +81,14 @@
       </section>
     </div>
   </main>
-
-  <!-- Script -->
-  <script>
+ <script>
     document.addEventListener("DOMContentLoaded", () => {
 
       // Vérification utilisateur
       const img = sessionStorage.getItem("userPicture");
       const name = sessionStorage.getItem("userName");
-      if (!img || !name) {
-        alert("Utilisateur non connecté !");
-        window.location.href = "index.html";
-        return;
-      }
+      
+    
       document.getElementById("dashboardProfile").src = img;
       document.getElementById("dashboardName").textContent = name;
 
@@ -102,11 +97,23 @@
         initBalancePage("currencySelect");
       }
 
-      // Toggle sidebar
-      const toggle = document.querySelector(".sidebar-toggle");
-      toggle.addEventListener("click", () => {
-        document.body.classList.toggle("sidebar-open");
-      });
+      const toggleBtn = document.querySelector(".sidebar-toggle");
+const sidebar = document.querySelector(".sidebar-wrapper");
+
+toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("sidebar-open");
+});
+
+// Fermer la sidebar si on clique en dehors
+document.addEventListener("click", (e) => {
+    if (!document.body.classList.contains("sidebar-open")) return;
+
+    // Si le clic n'est ni sur la sidebar ni sur le bouton toggle
+    if (!sidebar.contains(e.target) && e.target !== toggleBtn) {
+        document.body.classList.remove("sidebar-open");
+    }
+});
+
 
       // Affichage stats rapides
       updateStats();
@@ -131,10 +138,10 @@
 
       aside.innerHTML = `
         <h3>Stats rapides</h3>
-        <p>➡ Dépôts ce mois : ${depots.toFixed(2)}€</p>
-        <p>➡ Retraits : ${retraits.toFixed(2)}€</p>
+        
+        <p>Total dépôts : ${depots.toFixed(2)}</p>
         <p>📊 Dernière opération : ${
-          operations.length > 0 ? `${operations[0].type} ${operations[0].amount}€` : "Aucune"
+          operations.length > 0 ? `${operations[0].type} ${operations[0].amount}` : "Aucune"
         }</p>
       `;
     }

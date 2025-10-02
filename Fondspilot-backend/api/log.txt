@@ -1,0 +1,23 @@
+Array
+(
+    [id_token] => eyJhbGciOiJSUzI1NiIsImtpZCI6IjkyN2I4ZmI2N2JiYWQ3NzQ0NWU1ZmVhNGM3MWFhOTg0NmQ3ZGRkMDEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzNTI4NzQ4NzQ4MzctY2ZzZXVlcGlxNzVuMnFmcTY1OTVscTNhNTgxMjE5aXEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIzNTI4NzQ4NzQ4MzctY2ZzZXVlcGlxNzVuMnFmcTY1OTVscTNhNTgxMjE5aXEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDAyNjkzNDM4NDU1MzI0OTUzNzAiLCJlbWFpbCI6InNhbG9zaWs0QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYmYiOjE3NTg5ODM4MzgsIm5hbWUiOiJTYWxvbW9uIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tYZFg2b1lDQzVyajI5V1pPRlhnQnFqMUhMS3BoSDhfdkxIcmlsdkpDeFk5V2xwQT1zOTYtYyIsImdpdmVuX25hbWUiOiJTYWxvbW9uIiwiaWF0IjoxNzU4OTg0MTM4LCJleHAiOjE3NTg5ODc3MzgsImp0aSI6IjY2YmNjZDY5N2M4ZDQyYmM2MTg5MTRmYWY2YzdiM2I2OTBlM2VjMDIifQ.S_DMIJMrD7s_UzjoslQEz-zpsWi6NqW7nRUtJc26sIvBVm6UhbhHtZjkVAK_jsGJ8NnCb7KNbE4KIy4yx7IOjuwx2w7Et1e2csIwflqvRV_2rt9huk652nI9TTsOfLfK-AsDShjth_jd3szCHoxMS4MGYRlIcp-idFw2a_Y8OiNLptiS5PSTbzGyU3LsBLgjzQ1cpnkNDUdYQ0DSlwHHsWW3xGgxR2k2PN_1GRkw2JI0oxUIrt8g5RFXL5twWSUO90WMDbZFDom1KewrCj7yEzXJwNTnLUIKH0ON7NDINiRe-2vs5Ry8GHWtTsxCS1VADknPQRiaf-vdAH7wQfvhSA
+)
+Array
+(
+    [iss] => https://accounts.google.com
+    [azp] => 352874874837-cfseuepiq75n2qfq6595lq3a581219iq.apps.googleusercontent.com
+    [aud] => 352874874837-cfseuepiq75n2qfq6595lq3a581219iq.apps.googleusercontent.com
+    [sub] => 100269343845532495370
+    [email] => salosik4@gmail.com
+    [email_verified] => true
+    [nbf] => 1758983838
+    [name] => Salomon
+    [picture] => https://lh3.googleusercontent.com/a/ACg8ocKXdX6oYCC5rj29WZOFXgBqj1HLKphH8_vLHrilvJCxY9WlpA=s96-c
+    [given_name] => Salomon
+    [iat] => 1758984138
+    [exp] => 1758987738
+    [jti] => 66bccd697c8d42bc618914faf6c7b3b690e3ec02
+    [alg] => RS256
+    [kid] => 927b8fb67bbad77445e5fea4c71aa9846d7ddd01
+    [typ] => JWT
+)

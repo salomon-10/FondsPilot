@@ -57,7 +57,7 @@
             </div>
 
             <div style="margin-top:16px">
-              <button class="btn btn-primary" type="submit">Valider le dépôt</button>
+              <button class="confirmBtn" type="submit">Valider le dépôt</button>
               <button type="button" class="btn btn-ghost" onclick="location.href='dashboard.html'">Annuler</button>
             </div>
           </div>
@@ -73,7 +73,7 @@
               </div>
               <div class="cta">
                 <button id="previewBtn" class="btn btn-ghost">Prévisualiser</button>
-                <button id="confirmBtn" class="btn btn-primary">Confirmer</button>
+                <button id="confirmBtn" class="confirmBtn">Confirmer</button>
               </div>
             </div>
           </aside>
@@ -88,7 +88,7 @@
       <p id="modalBody">Résumé...</p>
       <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:14px;">
         <button class="btn btn-ghost" id="modalCancel">Annuler</button>
-        <button class="btn btn-primary" id="modalConfirm">Confirmer</button>
+        <button class="confirmBtn" id="modalConfirm">Confirmer</button>
       </div>
     </div>
   </div>
@@ -96,9 +96,10 @@
     function submitDeposit() {
   const montant = document.getElementById("montant").value;
 
-  fetch("http://localhost:8080/api/accounts/1/deposit?amount=" + montant, {
-    method: "POST"
-  })
+  fetch("https://fondspilot.zya.me/Fondspilot-backend/api/accounts/1/deposit?amount=" + montant, {
+  method: "POST",
+  credentials: "include"
+})
   .then(res => res.json())
   .then(data => {
     alert("✅ Dépôt réussi, solde actuel : " + data.balance);
