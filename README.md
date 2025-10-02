@@ -29,5 +29,6 @@ Accessible en ligne : 👉 [fondspilot.zya.me](https://fondspilot.zya.me)
 
 1. **Cloner le projet**
    ```bash
-   git clone https://github.com/ton-github/fondspilot.git
+   git clone https://github.com/salomon-10/fondspilot.git
    cd fondspilot
+
